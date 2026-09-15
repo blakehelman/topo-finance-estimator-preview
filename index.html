@@ -928,6 +928,16 @@
   </style>
 </head>
 <body>
+<div id="password-gate" style="position:fixed;inset:0;z-index:99999;background:#f9fafb;display:flex;align-items:center;justify-content:center;font-family:'Inter',system-ui,sans-serif;">
+  <div style="text-align:center;max-width:360px;padding:24px;">
+    <div style="font-size:28px;font-weight:700;color:#1A2AEB;margin-bottom:8px;">Financed Emissions Tool</div>
+    <div style="font-size:14px;color:#666;margin-bottom:24px;">Enter the password to continue</div>
+    <input id="gate-input" type="password" placeholder="Password" style="width:100%;padding:12px 16px;font-size:16px;border:2px solid #ddd;border-radius:4px;outline:none;font-family:inherit;" onkeydown="if(event.key==='Enter')document.getElementById('gate-btn').click()">
+    <button id="gate-btn" onclick="if(document.getElementById('gate-input').value==='TopoFETool'){document.getElementById('password-gate').remove();document.getElementById('app-wrap').style.display=''}else{document.getElementById('gate-input').style.borderColor='#e53e3e';document.getElementById('gate-error').style.display='block'}" style="width:100%;margin-top:12px;padding:12px;font-size:16px;font-weight:600;color:#fff;background:#1A2AEB;border:none;border-radius:4px;cursor:pointer;font-family:inherit;">Enter</button>
+    <div id="gate-error" style="display:none;margin-top:8px;color:#e53e3e;font-size:14px;">Incorrect password</div>
+  </div>
+</div>
+<div id="app-wrap" style="display:none;">
 
 <!-- HEADER -->
 <header id="site-header">
@@ -1905,5 +1915,6 @@ headerLogo.style.cursor = 'pointer';
 headerLogo.addEventListener('click', () => { stepId = 'welcome'; data = freshData(); render(); });
 render();
 </script>
+</div>
 </body>
 </html>
