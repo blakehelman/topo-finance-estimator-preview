@@ -1352,10 +1352,10 @@ function renderGsibInput() {
   <div class="step-wrap">
     <div class="step-eyebrow">Step ${stepNum()} of ${workingTotal()}</div>
     <h2 class="step-title">How much do you hold at each bank?</h2>
-    <p class="step-subtitle">Enter the approximate USD equivalent of cash deposits at each bank. Leave blank or enter 0 if you're unsure.</p>
+    <p class="step-subtitle">Enter the approximate amount held at each bank in USD millions. Approximate figures work. If you are unsure of the exact split, your best estimate is fine.<br><br>Please choose a similar point in time for all positions (for instance reported year-end).</p>
     <div class="bank-grid">${rows}</div>
     <div class="total-preview">
-      <span>Total G-SIB deposits entered</span>
+      <span>Total bank deposits</span>
       <strong id="gsib-total">$${total > 0 ? total.toLocaleString() : '0'}M</strong>
     </div>
     <div class="info-expand">
@@ -1460,8 +1460,9 @@ function renderReview() {
 
   return `
   <div class="step-wrap">
-    <h2 class="step-title">Review your inputs</h2>
-    <p class="step-subtitle">Check everything looks right before we calculate your results. Use the Back button to make changes.</p>
+    <div class="step-eyebrow">Step ${stepNum()} of ${workingTotal()}</div>
+    <h2 class="step-title">Information Review</h2>
+    <p class="step-subtitle">Please review the information below to ensure it is correct before we calculate your results. Use the Back button to make any changes.</p>
 
     <div class="review-block">
       <div class="review-block-header">
@@ -1502,11 +1503,11 @@ function renderScope123() {
     <div class="step-eyebrow">Step ${stepNum()} of ${workingTotal()}</div>
     <h2 class="step-title">Company Reported Emissions <span class="optional-badge">Optional</span></h2>
     <p class="step-subtitle">
-      If your company has publicly reported emissions, enter them here. We'll show how your estimated financed emissions compare to your total reported footprint. You can usually find these in your annual report or sustainability disclosure.
+      If your company has publicly reported its carbon emissions, please enter them here. You may enter your total combined emissions or break them down by Scope 1, 2 and 3 separately. These figures can typically be found in your company's annual report or sustainability disclosure.
     </p>
 
     <div class="scope-tabs">
-      <div class="scope-tab${!isSplit ? ' active' : ''}" onclick="data.scopeMode='total'; setField('scope1',''); setField('scope2',''); setField('scope3',''); render();">One total figure</div>
+      <div class="scope-tab${!isSplit ? ' active' : ''}" onclick="data.scopeMode='total'; setField('scope1',''); setField('scope2',''); setField('scope3',''); render();">Reported CO2e Emissions: Enter Total Scope 1, 2 and 3</div>
       <div class="scope-tab${isSplit ? ' active' : ''}" onclick="data.scopeMode='split'; setField('scopeTotal',''); render();">Scope 1, 2 &amp; 3 separately</div>
     </div>
 
@@ -1585,7 +1586,7 @@ function renderResults() {
   const heroContent = total > 0 ? `
     <div class="results-tag">Estimated Financed Emissions</div>
     <div class="results-number">${fmtNum(total)}</div>
-    <div class="results-unit">tCO\u2082e / year (indicative estimate)</div>
+    <div class="results-unit">tCO\u2082e / year</div>
     ${pct ? `<div class="results-scope-pill">≈ <strong>${pct}%</strong> of your reported Scope 1, 2 &amp; 3 emissions</div>` : ''}
   ` : `
     <div class="results-tag">Estimated Financed Emissions</div>
